@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.devtools.ksp") version "1.9.23-1.0.20"
 }
 
 android {
@@ -40,11 +41,17 @@ android {
 }
 
 dependencies {
+    val room_version = "2.6.1"
 
     implementation(libs.androidx.core.ktx)
-    implementation("androidx.room:room-ktx:2.4.3")
-    implementation("androidx.room:room-compiler:2.4.3")
-    runtimeOnly("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
+
+    implementation("androidx.room:room-ktx:$room_version")
+    val lifecycle_version = "2.7.0"
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    ksp("androidx.room:room-compiler:$room_version")
+//    implementation("androidx.room:room-ktx:2.4.3")
+//    implementation("androidx.room:room-compiler:2.4.3")
+//    runtimeOnly("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
 
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
